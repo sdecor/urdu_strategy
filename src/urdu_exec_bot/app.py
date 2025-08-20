@@ -45,6 +45,17 @@ def run() -> None:
     interval_ms = int(settings.get("polling", {}).get("interval_ms", 500))
     try:
         while True:
+            # Reset quotidien du mode évaluation (dégele le trading à l'heure configurée)
+            risk.maybe_daily_reset(state)
+
+            # Si on est gelé, s'assurer que tout est flat et ignorer les signaux
+            if state.trading_halted_today:
+                if risk.should_flat_all(state):
+                    exec_service.close_all(state)
+                state_store.save(state)
+                time.sleep(max(0.0, interval_ms / 1000.0))
+                continue
+
             lines = watcher.read_new_lines()
             for line in lines:
                 sig = parser.parse_line(line)
@@ -54,8 +65,15 @@ def run() -> None:
                 orders = strategy.decide_orders(sig, pos)
                 if orders:
                     exec_service.execute_signal_orders(state, orders)
-            if risk.should_flat_all(state):
-                exec_service.close_all(state)
+
+                # Après chaque exécution, vérifier si un halt évaluation doit s'appliquer
+                just_halted = risk.check_and_mark_halt(state)
+                if just_halted or risk.should_flat_all(state):
+                    exec_service.close_all(state)
+                    # si halt évaluation, on sort de la boucle de traitement de lignes
+                    if state.trading_halted_today:
+                        break
+
             state_store.save(state)
             time.sleep(max(0.0, interval_ms / 1000.0))
     except KeyboardInterrupt:

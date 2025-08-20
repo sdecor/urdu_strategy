@@ -21,14 +21,11 @@ polling:
 csv_reader:
   start_from_end: true
   delimiter: ","
-  has_header: false
-  schema: ["instrument", "action"]
+  has_header: true
+  schema: ["received_at", "content_type", "raw"]
   action_mapping:
-    long: LONG
     buy: LONG
-    short: SHORT
     sell: SHORT
-    exit: EXIT
 
 execution:
   dry_run: true
@@ -39,11 +36,13 @@ execution:
 
 topstepx:
   base_url: https://api.topstepx.com
-  account_id: REPLACE_ME
+  username: "invest@artinitiative.net"
+  account_id: "10832315"
   auth:
     api_key_env: TOPSTEPX_API_KEY
   endpoints:
     login_key: /api/Auth/loginKey
+    validate_token: /api/Auth/validate
     order_search: /api/Order/search
     order_search_open: /api/Order/searchOpen
     order_cancel: /api/Order/cancel
@@ -53,3 +52,5 @@ topstepx:
     contract_search_by_id: /api/Contract/searchById
     order_place: /api/Order/place
     account_search: /api/Account/search
+  contracts:
+    UB1!: "CON.F.US.ULA.U25"

@@ -10,6 +10,7 @@ class SignalAction(str, Enum):
     LONG = "LONG"
     SHORT = "SHORT"
     EXIT = "EXIT"
+    FLAT = "FLAT"
 
 
 def _iso_now() -> str:

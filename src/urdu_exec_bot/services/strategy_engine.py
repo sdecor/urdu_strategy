@@ -19,6 +19,8 @@ class StrategyEngine:
             target = PositionSide.LONG
         elif action == SignalAction.SHORT:
             target = PositionSide.SHORT
+        elif action == SignalAction.FLAT:
+            target = PositionSide.FLAT
         else:
             if current_position.side == PositionSide.LONG:
                 target = PositionSide.SHORT
