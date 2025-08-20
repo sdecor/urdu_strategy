@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional, Tuple
 ROOT = Path(__file__).resolve().parents[1]
 SETTINGS_DEFAULT = ROOT / "config" / "settings.yaml"
 
+
 def _load_dotenv() -> None:
     env_path = ROOT / ".env"
     if not env_path.exists():
@@ -23,6 +24,7 @@ def _load_dotenv() -> None:
             os.environ.setdefault(k.strip(), v.strip().strip("'").strip('"'))
     except Exception:
         pass
+
 
 _load_dotenv()
 
@@ -68,14 +70,8 @@ def _print_table(rows: List[Dict[str, Any]], fields: List[str]) -> None:
     if not rows:
         print("(vide)")
         return
-    # keep only present fields
-    present = [f for f in fields if any(f in r for r in rows)]
-    if not present:
-        # show keys of first row
-        present = list(rows[0].keys())
-    # widths
+    present = [f for f in fields if any(f in r for r in rows)] or list(rows[0].keys())
     widths = {f: max(len(str(f)), *(len(str(r.get(f, ""))) for r in rows)) for f in present}
-    # header
     hdr = " | ".join(f.ljust(widths[f]) for f in present)
     sep = "-+-".join("-" * widths[f] for f in present)
     print(hdr)
@@ -85,7 +81,6 @@ def _print_table(rows: List[Dict[str, Any]], fields: List[str]) -> None:
 
 
 def _normalize_contract_row(row: Dict[str, Any]) -> Dict[str, Any]:
-    # Many APIs; try map to stable keys
     return {
         "contractId": row.get("contractId") or row.get("id") or row.get("contractID") or row.get("ContractId"),
         "symbol": row.get("symbol") or row.get("Symbol") or row.get("ticker") or row.get("code"),
@@ -105,13 +100,25 @@ def _normalize_account_row(row: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+def _uniq_by(rows: List[Dict[str, Any]], key: str) -> List[Dict[str, Any]]:
+    seen = set()
+    out: List[Dict[str, Any]] = []
+    for r in rows:
+        v = r.get(key)
+        if v in seen:
+            continue
+        seen.add(v)
+        out.append(r)
+    return out
+
+
 # --------------------------- auth ---------------------------
 
-def login_key(base_url: str, endpoints: Dict[str, str], username: str, api_key: str, timeout: int = 20) -> Tuple[Optional[str], Dict[str, Any]]:
+def login_key(base_url: str, endpoints: Dict[str, str], username: str, api_key: str, timeout: int = 20) -> Tuple[Optional[str], Any]:
     url = _url(base_url, endpoints, "login_key", "/api/Auth/loginKey")
     code, data = _post(url, None, {"userName": username, "apiKey": api_key}, timeout=timeout)
     if 200 <= code < 300 and isinstance(data, dict) and data.get("success") and data.get("token"):
-        return str(data["token"]), data
+        return str(data["token"]), {"code": code}
     return None, {"code": code, "data": data}
 
 
@@ -129,46 +136,60 @@ def list_accounts(base_url: str, endpoints: Dict[str, str], token: str, active_o
     code, data = _post(url, token, payload, timeout=timeout)
     if 200 <= code < 300 and isinstance(data, (list, dict)):
         rows = data if isinstance(data, list) else data.get("accounts") or data.get("items") or []
-        return True, [ _normalize_account_row(r) for r in rows ], {"code": code}
+        return True, [_normalize_account_row(r) for r in rows], {"code": code}
     return False, [], {"code": code, "data": data}
 
 
-def contracts_available(base_url: str, endpoints: Dict[str, str], token: str, live: Optional[bool], timeout: int = 30) -> Tuple[bool, List[Dict[str, Any]], Any]:
+def contracts_available(base_url: str, endpoints: Dict[str, str], token: str, live: bool, timeout: int = 30) -> Tuple[bool, List[Dict[str, Any]], Any]:
     url = _url(base_url, endpoints, "contract_available", "/api/Contract/available")
-    payload: Dict[str, Any] = {}
-    if live is not None:
-        payload["live"] = bool(live)
+    payload: Dict[str, Any] = {"live": bool(live)}
     code, data = _post(url, token, payload, timeout=timeout)
     if 200 <= code < 300 and isinstance(data, (list, dict)):
         rows = data if isinstance(data, list) else data.get("contracts") or data.get("items") or []
-        return True, [ _normalize_contract_row(r) for r in rows ], {"code": code}
+        return True, [_normalize_contract_row(r) for r in rows], {"code": code}
     return False, [], {"code": code, "data": data}
 
 
 def contracts_search(base_url: str, endpoints: Dict[str, str], token: str, query: str, timeout: int = 30) -> Tuple[bool, List[Dict[str, Any]], Any]:
+    """
+    Essaie plusieurs formes de payload selon l'API:
+      1) {"query": "..."}
+      2) {"request": {"query": "..."}}
+      3) {"request": {"query": "...", "live": true}}
+      4) {"request": {"query": "...", "live": false}}
+    """
     url = _url(base_url, endpoints, "contract_search", "/api/Contract/search")
-    payload = {"query": query}
-    code, data = _post(url, token, payload, timeout=timeout)
-    if 200 <= code < 300 and isinstance(data, (list, dict)):
-        rows = data if isinstance(data, list) else data.get("contracts") or data.get("items") or []
-        return True, [ _normalize_contract_row(r) for r in rows ], {"code": code}
-    return False, [], {"code": code, "data": data}
+    candidates = [
+        {"query": query},
+        {"request": {"query": query}},
+        {"request": {"query": query, "live": True}},
+        {"request": {"query": query, "live": False}},
+    ]
+    last_meta: Any = {}
+    for payload in candidates:
+        code, data = _post(url, token, payload, timeout=timeout)
+        last_meta = {"code": code, "data": data}
+        if 200 <= code < 300 and isinstance(data, (list, dict)):
+            rows = data if isinstance(data, list) else data.get("contracts") or data.get("items") or []
+            if rows:
+                return True, [_normalize_contract_row(r) for r in rows], {"code": code}
+    return False, [], last_meta
 
 
 def contracts_find_any(base_url: str, endpoints: Dict[str, str], token: str, needle: str, timeout: int = 30) -> Tuple[bool, List[Dict[str, Any]], Any]:
     ok, rows, meta = contracts_search(base_url, endpoints, token, needle, timeout=timeout)
     if ok and rows:
         return True, rows, meta
-    # fallback: available + client-side filter
-    ok2, allrows, meta2 = contracts_available(base_url, endpoints, token, live=None, timeout=timeout)
-    if not ok2:
-        return False, [], meta2
+
+    ok_t, rows_t, meta_t = contracts_available(base_url, endpoints, token, live=True, timeout=timeout)
+    ok_p, rows_p, meta_p = contracts_available(base_url, endpoints, token, live=False, timeout=timeout)
+    allrows = rows_t + rows_p
     n = needle.lower()
-    filtered = []
-    for r in allrows:
-        if any(n in str(r.get(k, "")).lower() for k in ("contractId", "symbol", "root", "name", "exchange")):
-            filtered.append(r)
-    return True, filtered, meta2
+    filtered = [
+        r for r in allrows
+        if any(n in str(r.get(k, "")).lower() for k in ("contractId", "symbol", "root", "name", "exchange"))
+    ]
+    return bool(filtered), _uniq_by(filtered, "contractId"), {"code": (meta_t.get("code"), meta_p.get("code"))}
 
 
 # --------------------------- CLI ---------------------------
@@ -185,7 +206,7 @@ def main() -> None:
     acc.add_argument("--save", type=str, default="")
 
     con = sub.add_parser("contracts", help="Lister les contrats disponibles")
-    con.add_argument("--live", type=str, choices=["true", "false", "auto"], default="auto")
+    con.add_argument("--live", type=str, choices=["true", "false", "auto"], default="true")
     con.add_argument("--filter", type=str, default="")
     con.add_argument("--limit", type=int, default=50)
     con.add_argument("--json", action="store_true")
@@ -211,12 +232,11 @@ def main() -> None:
         print("[ERROR] Config/API key manquante: base_url/username/api_key", file=sys.stderr)
         sys.exit(2)
 
-    token, auth_data = login_key(base_url, endpoints, username, api_key, timeout=args.timeout)
+    token, auth_meta = login_key(base_url, endpoints, username, api_key, timeout=args.timeout)
     if not token:
-        print(f"[ERROR] Auth KO ⇒ {auth_data}", file=sys.stderr)
+        print(f"[ERROR] Auth KO ⇒ {auth_meta}", file=sys.stderr)
         sys.exit(3)
 
-    # Optional validate (ignore result)
     _ = validate_token(base_url, endpoints, token, timeout=10)
 
     if args.cmd == "accounts":
@@ -236,18 +256,30 @@ def main() -> None:
             _print_table(rows, ["accountId", "name", "status", "type"])
 
     elif args.cmd == "contracts":
-        live = None if args.live == "auto" else (args.live == "true")
-        ok, rows, meta = contracts_available(base_url, endpoints, token, live=live, timeout=args.timeout)
-        if not ok:
-            print(f"[ERROR] contracts ⇒ {meta}", file=sys.stderr)
-            sys.exit(5)
+        rows: List[Dict[str, Any]] = []
+        if args.live == "auto":
+            ok_t, items_t, _ = contracts_available(base_url, endpoints, token, live=True, timeout=args.timeout)
+            ok_p, items_p, _ = contracts_available(base_url, endpoints, token, live=False, timeout=args.timeout)
+            if not ok_t and not ok_p:
+                print("[ERROR] contracts ⇒ appels live=true/false ont échoué", file=sys.stderr)
+                sys.exit(5)
+            rows = _uniq_by(items_t + items_p, "contractId")
+        else:
+            live = args.live == "true"
+            ok, items, meta = contracts_available(base_url, endpoints, token, live=live, timeout=args.timeout)
+            if not ok:
+                print(f"[ERROR] contracts ⇒ {meta}", file=sys.stderr)
+                sys.exit(5)
+            rows = items
+
         if args.filter:
             f = args.filter.lower()
             rows = [r for r in rows if any(f in str(r.get(k, "")).lower() for k in ("contractId", "symbol", "root", "name", "exchange"))]
         if args.limit and len(rows) > args.limit:
             rows = rows[:args.limit]
+
         if args.json or args.save:
-            payload = {"items": rows, "meta": meta}
+            payload = {"items": rows}
             s = json.dumps(payload, ensure_ascii=False, indent=2)
             if args.save:
                 Path(args.save).write_text(s, encoding="utf-8")
@@ -265,7 +297,7 @@ def main() -> None:
         if args.limit and len(rows) > args.limit:
             rows = rows[:args.limit]
         if args.json or args.save:
-            payload = {"items": rows, "meta": meta, "query": args.query}
+            payload = {"items": rows, "query": args.query}
             s = json.dumps(payload, ensure_ascii=False, indent=2)
             if args.save:
                 Path(args.save).write_text(s, encoding="utf-8")
