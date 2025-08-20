@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "urdu-exec-bot"
+version = "0.1.0"
+description = "URDU execution bot reading signals CSV and executing via TopstepX"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "PyYAML>=6.0",
+  "requests>=2.31"
+]
+
+[project.scripts]
+urdu-exec-bot = "urdu_exec_bot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

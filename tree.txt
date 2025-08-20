@@ -1,0 +1,69 @@
+vwap_exec_bot/
+├─ pyproject.toml
+├─ README.md
+├─ .env.example
+├─ .gitignore
+├─ Makefile
+├─ requirements-dev.txt
+├─ config/
+│  ├─ settings.yaml
+│  ├─ instruments_lots.yaml
+│  ├─ logging.yaml
+│  └─ risk.yaml
+├─ data/
+│  ├─ input/
+│  │  └─ signals.csv
+│  └─ archive/
+├─ logs/
+├─ state/
+│  ├─ trade_state.json
+│  └─ offsets/
+│     └─ signals.offset
+├─ scripts/
+│  ├─ simulate_signals.py
+│  ├─ backfill_from_csv.py
+│  └─ reset_state.py
+├─ src/
+│  └─ vwap_exec_bot/
+│     ├─ __init__.py
+│     ├─ app.py
+│     ├─ cli.py
+│     ├─ csv_watcher.py
+│     ├─ parsers/
+│     │  ├─ __init__.py
+│     │  └─ signal_csv.py
+│     ├─ models/
+│     │  ├─ __init__.py
+│     │  ├─ signal.py
+│     │  ├─ order.py
+│     │  ├─ position.py
+│     │  └─ trade_state.py
+│     ├─ services/
+│     │  ├─ __init__.py
+│     │  ├─ strategy_engine.py
+│     │  ├─ position_manager.py
+│     │  ├─ risk_manager.py
+│     │  ├─ pnl_tracker.py
+│     │  ├─ lot_sizing.py
+│     │  ├─ execution_service.py
+│     │  ├─ topstepx_client.py
+│     │  ├─ state_store.py
+│     │  └─ event_bus.py
+│     └─ utils/
+│        ├─ __init__.py
+│        ├─ time_utils.py
+│        ├─ ids.py
+│        └─ logging_setup.py
+├─ tests/
+│  ├─ conftest.py
+│  ├─ unit/
+│  │  ├─ test_strategy_engine.py
+│  │  ├─ test_risk_manager.py
+│  │  ├─ test_csv_parser.py
+│  │  └─ test_execution_service.py
+│  └─ integration/
+│     ├─ test_topstepx_client.py
+│     └─ test_end_to_end.py
+└─ docker/
+   ├─ Dockerfile
+   └─ docker-compose.yml

@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  urdu_exec_bot:
+    build: .
+    container_name: urdu_exec_bot
+    working_dir: /app
+    environment:
+      - TZ=Europe/Zurich
+      - TOPSTEPX_API_KEY=${TOPSTEPX_API_KEY}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./config:/app/config
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./state:/app/state
+    command: ["python", "-u", "src/urdu_exec_bot/app.py"]
+    restart: unless-stopped

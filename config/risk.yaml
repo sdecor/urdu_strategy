@@ -1,0 +1,10 @@
+pnl:
+  daily_close_all_when_gte: 2000
+  currency: USD
+  reset_time_local: "00:00"
+
+trading:
+  allow_flip_on_exit: true
+  unique_trade_at_a_time: true
+  max_size_per_instrument: null
+  allowed_instruments: ["GC", "UB", "ES", "NQ"]

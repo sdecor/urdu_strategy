@@ -1,0 +1,6 @@
+lots:
+  default: 1
+  GC: 1
+  UB: 2
+  ES: 1
+  NQ: 1

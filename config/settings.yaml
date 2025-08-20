@@ -1,0 +1,55 @@
+app_name: urdu_exec_bot
+strategy: URDU
+timezone: Europe/Zurich
+
+paths:
+  csv_input: data/input/signals.csv
+  archive_dir: data/archive
+  logs_dir: logs
+  state:
+    trade_state: state/trade_state.json
+    offset: state/offsets/signals.offset
+
+config_files:
+  lots: config/instruments_lots.yaml
+  risk: config/risk.yaml
+  logging: config/logging.yaml
+
+polling:
+  interval_ms: 500
+
+csv_reader:
+  start_from_end: true
+  delimiter: ","
+  has_header: false
+  schema: ["instrument", "action"]
+  action_mapping:
+    long: LONG
+    buy: LONG
+    short: SHORT
+    sell: SHORT
+    exit: EXIT
+
+execution:
+  dry_run: true
+  unique_trade_at_a_time: true
+  send_bracket_orders: true
+  default_tp_ticks: 4
+  default_sl_ticks: 8
+
+topstepx:
+  base_url: https://api.topstepx.com
+  account_id: REPLACE_ME
+  auth:
+    api_key_env: TOPSTEPX_API_KEY
+  endpoints:
+    login_key: /api/Auth/loginKey
+    order_search: /api/Order/search
+    order_search_open: /api/Order/searchOpen
+    order_cancel: /api/Order/cancel
+    position_search_open: /api/Position/searchOpen
+    contract_available: /api/Contract/available
+    contract_search: /api/Contract/search
+    contract_search_by_id: /api/Contract/searchById
+    order_place: /api/Order/place
+    account_search: /api/Account/search
