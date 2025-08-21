@@ -12,4 +12,4 @@ trading:
   allow_flip_on_exit: true
   unique_trade_at_a_time: true
   max_size_per_instrument: null
-  allowed_instruments: ["GC", "GC1!", "UB", "UB1!", "ES", "NQ"]
+  allowed_instruments: ["UB1!"]

@@ -1,24 +1,43 @@
+from __future__ import annotations
+
 import logging
 import logging.config
 from pathlib import Path
-import os
+from typing import Any, Dict, Optional
+
 import yaml
 
 
-def setup_logging(settings_path: str) -> None:
-    with open(settings_path, "r", encoding="utf-8") as f:
-        settings = yaml.safe_load(f) or {}
-    logging_cfg_path = settings.get("config_files", {}).get("logging")
-    if not logging_cfg_path:
-        logging.basicConfig(level=logging.INFO)
+def _fallback_config() -> None:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        force=True,  # remplace tout handler existant pour garantir l'horodatage
+    )
+
+
+def setup_logging(config_path: Optional[str | Path]) -> None:
+    """
+    Charge une config YAML (dictConfig). En cas d'échec ou d'absence,
+    applique une configuration par défaut avec horodatage.
+    """
+    if not config_path:
+        _fallback_config()
         return
-    path = Path(logging_cfg_path)
-    if not path.is_absolute():
-        root = Path(settings_path).resolve().parents[1]
-        path = (root / logging_cfg_path).resolve()
-    if path.exists():
-        with open(path, "r", encoding="utf-8") as f:
-            cfg = yaml.safe_load(f) or {}
-        logging.config.dictConfig(cfg)
-    else:
-        logging.basicConfig(level=logging.INFO)
+
+    p = Path(config_path)
+    if not p.exists():
+        _fallback_config()
+        return
+
+    try:
+        with p.open("r", encoding="utf-8") as f:
+            cfg: Dict[str, Any] = yaml.safe_load(f) or {}
+        if isinstance(cfg, dict) and cfg:
+            logging.config.dictConfig(cfg)
+            return
+    except Exception:
+        pass
+
+    _fallback_config()

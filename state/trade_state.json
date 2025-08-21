@@ -1,0 +1,19 @@
+{
+  "positions": {
+    "UB1!": {
+      "side": "FLAT",
+      "size": 0
+    }
+  },
+  "pnl": {
+    "today": 0.0,
+    "date": "2025-08-21"
+  },
+  "evaluation": {
+    "halted": false,
+    "halt_reason": ""
+  },
+  "meta": {
+    "version": 1
+  }
+}
