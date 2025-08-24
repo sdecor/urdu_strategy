@@ -284,3 +284,178 @@
 [2025-08-24T21:58:37.321403Z] [POSITION] Réponse brute: {"positions":[],"success":true,"errorCode":0,"errorMessage":null}
 [2025-08-24T21:58:37.337692Z] [FLATTEN] Aucune position ouverte détectée.
 [2025-08-24T21:58:37.348570Z] [PROBE] Séquence complète terminée.
+[2025-08-24T22:12:56.614318Z] [URDU BOT] Démarrage en mode : LIVE
+[2025-08-24T22:12:57.545171Z] [AUTH] POST https://api.topstepx.com/api/Auth/loginKey -> 200
+[2025-08-24T22:12:57.553468Z] [AUTH] Réponse brute: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjZkMmFiZjQwLTc1YTktNGE1Zi05NWI1LWVlOTc1Y2I4N2JmOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE1OTk3OH0.pE1c3XTkWZj53mQj8AF6lk30XLLtdDky_b5y80qyTxA","success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:12:57.569647Z] [AUTH] Authentification réussie, token obtenu.
+[2025-08-24T22:12:57.581940Z] [PROBE] 1/3 Ouverture d'un ordre MARKET size=1
+[2025-08-24T22:12:57.637289Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:12:57.644760Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:12:57.653516Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjZkMmFiZjQwLTc1YTktNGE1Zi05NWI1LWVlOTc1Y2I4N2JmOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE1OTk3OH0.pE1c3XTkWZj53mQj8AF6lk30XLLtdDky_b5y80qyTxA', 'Content-Type': 'application/json'}
+[2025-08-24T22:12:57.662227Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 0, 'size': 1}
+[2025-08-24T22:12:58.600242Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:12:58.607697Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:12:58.625118Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjZkMmFiZjQwLTc1YTktNGE1Zi05NWI1LWVlOTc1Y2I4N2JmOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE1OTk3OH0.pE1c3XTkWZj53mQj8AF6lk30XLLtdDky_b5y80qyTxA', 'Content-Type': 'application/json'}
+[2025-08-24T22:12:58.633648Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 0, 'size': 1}
+[2025-08-24T22:12:58.807770Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:12:58.814024Z] [TRADE] Réponse brute: {"orderId":1509807226,"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:12:58.820399Z] [TRADE] Succès métier confirmé (success=true).
+[2025-08-24T22:12:58.828928Z] [PROBE] 2/3 Récupération des positions ouvertes
+[2025-08-24T22:12:58.848170Z] [POSITION] Envoi POST => URL: https://api.topstepx.com/api/Position/searchOpen
+[2025-08-24T22:12:58.856127Z] [POSITION] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjZkMmFiZjQwLTc1YTktNGE1Zi05NWI1LWVlOTc1Y2I4N2JmOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE1OTk3OH0.pE1c3XTkWZj53mQj8AF6lk30XLLtdDky_b5y80qyTxA', 'Content-Type': 'application/json'}
+[2025-08-24T22:12:58.886861Z] [POSITION] Payload: {'accountId': 10889305}
+[2025-08-24T22:12:59.000234Z] [POSITION] Statut HTTP: 200
+[2025-08-24T22:12:59.020273Z] [POSITION] Réponse brute: {"positions":[{"id":343264908,"accountId":10889305,"contractId":"CON.F.US.ULA.U25","creationTimestamp":"2025-08-24T22:12:59.652976+00:00","type":1,"size":1,"averagePrice":117.593750000}],"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:12:59.047943Z] [PROBE] Positions ouvertes (brut): {'positions': [{'id': 343264908, 'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'creationTimestamp': '2025-08-24T22:12:59.652976+00:00', 'type': 1, 'size': 1, 'averagePrice': 117.59375}], 'success': True, 'errorCode': 0, 'errorMessage': None}
+[2025-08-24T22:12:59.058318Z] [PROBE] 3/3 Flatten all
+[2025-08-24T22:12:59.086588Z] [POSITION] Envoi POST => URL: https://api.topstepx.com/api/Position/searchOpen
+[2025-08-24T22:12:59.098305Z] [POSITION] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjZkMmFiZjQwLTc1YTktNGE1Zi05NWI1LWVlOTc1Y2I4N2JmOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE1OTk3OH0.pE1c3XTkWZj53mQj8AF6lk30XLLtdDky_b5y80qyTxA', 'Content-Type': 'application/json'}
+[2025-08-24T22:12:59.114977Z] [POSITION] Payload: {'accountId': 10889305}
+[2025-08-24T22:12:59.224329Z] [POSITION] Statut HTTP: 200
+[2025-08-24T22:12:59.238678Z] [POSITION] Réponse brute: {"positions":[{"id":343264908,"accountId":10889305,"contractId":"CON.F.US.ULA.U25","creationTimestamp":"2025-08-24T22:12:59.652976+00:00","type":1,"size":1,"averagePrice":117.593750000}],"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:12:59.247646Z] [FLATTEN] Position ignorée (incomplète): {'id': 343264908, 'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'creationTimestamp': '2025-08-24T22:12:59.652976+00:00', 'type': 1, 'size': 1, 'averagePrice': 117.59375}
+[2025-08-24T22:12:59.257802Z] [FLATTEN] Rien à fermer pour ce contrat.
+[2025-08-24T22:12:59.271476Z] [PROBE] Séquence complète terminée.
+[2025-08-24T22:18:22.987109Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T22:18:22.992545Z] [URDU BOT] Monitoring actif...
+[2025-08-24T22:18:28.313544Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T22:18:28.321197Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T22:18:40.130940Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T22:18:40.137930Z] [URDU BOT] Monitoring actif...
+[2025-08-24T22:18:40.143560Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.442559Z', 'position': -1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:18:40.149561Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.945065Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:18:45.157297Z] [RULES] Traitement des signaux pour 2025-08-24T20:19 : {0, -1}
+[2025-08-24T22:18:45.165079Z] [RULES] Short -1
+[2025-08-24T22:18:45.182733Z] [EXECUTOR] Traitement signal UB1! -> position -1 (qty=1)
+[2025-08-24T22:18:45.210284Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T22:25:55.729735Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T22:25:55.735229Z] [URDU BOT] Monitoring actif...
+[2025-08-24T22:25:55.739964Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.442559Z', 'position': -1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:25:55.745254Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.945065Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:26:00.752882Z] [RULES] Traitement des signaux pour 2025-08-24T20:19 : {0, -1}
+[2025-08-24T22:26:00.757617Z] [RULES] Short -1
+[2025-08-24T22:26:00.762663Z] [EXECUTOR] Traitement signal UB1! -> position -1 (qty=1)
+[2025-08-24T22:26:00.772309Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T22:26:00.772189Z', 'instrument': 'UB1!', 'position': -1, 'size': 1, 'status': 'simulated'}
+[2025-08-24T22:26:10.609862Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T22:26:10.614513Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T22:26:44.853976Z] [URDU BOT] Démarrage en mode : LIVE
+[2025-08-24T22:26:45.766858Z] [AUTH] POST https://api.topstepx.com/api/Auth/loginKey -> 200
+[2025-08-24T22:26:45.774495Z] [AUTH] Réponse brute: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk","success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:26:45.787082Z] [AUTH] Authentification réussie, token obtenu.
+[2025-08-24T22:26:45.795449Z] [URDU BOT] Monitoring actif...
+[2025-08-24T22:26:45.809160Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.442559Z', 'position': -1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:26:45.817902Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.945065Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:26:50.833731Z] [RULES] Traitement des signaux pour 2025-08-24T20:19 : {0, -1}
+[2025-08-24T22:26:50.839110Z] [RULES] Short -1
+[2025-08-24T22:26:50.844469Z] [EXECUTOR] Traitement signal UB1! -> position -1 (qty=1)
+[2025-08-24T22:26:50.864275Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:26:50.870802Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:26:50.877174Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:26:50.887290Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:26:51.787679Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:26:51.792988Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:26:51.798317Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:26:51.809514Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:26:51.946103Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:26:51.951510Z] [TRADE] Réponse brute: {"orderId":1509843949,"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:26:51.957740Z] [TRADE] Succès métier confirmé (success=true).
+[2025-08-24T22:28:46.024088Z] [SIGNAL] Lu depuis NDJSON : {'content_type': 'text/plain', 'instrument': 'UB1!', 'position': -1, 'timestamp': '2025-08-24T22:28:44.517871Z'}
+[2025-08-24T22:28:51.032147Z] [RULES] Traitement des signaux pour 2025-08-24T22:28 : {-1}
+[2025-08-24T22:28:51.042776Z] [RULES] Short -1
+[2025-08-24T22:28:51.057440Z] [EXECUTOR] Traitement signal UB1! -> position -1 (qty=1)
+[2025-08-24T22:28:51.076725Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:28:51.103364Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:28:51.129639Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:28:51.140546Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:28:51.255566Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:28:51.261975Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:28:51.267113Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:28:51.273811Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:28:51.407810Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:28:51.416458Z] [TRADE] Réponse brute: {"orderId":1509847472,"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:28:51.422576Z] [TRADE] Succès métier confirmé (success=true).
+[2025-08-24T22:31:07.499399Z] [SIGNAL] Lu depuis NDJSON : {'content_type': 'text/plain', 'instrument': 'UB1!', 'position': -1, 'timestamp': '2025-08-24T22:31:06.404348Z'}
+[2025-08-24T22:31:07.556490Z] [SIGNAL] Lu depuis NDJSON : {'content_type': 'text/plain', 'instrument': 'UB1!', 'position': 0, 'timestamp': '2025-08-24T22:31:06.910928Z'}
+[2025-08-24T22:31:12.570483Z] [RULES] Traitement des signaux pour 2025-08-24T22:31 : {0, -1}
+[2025-08-24T22:31:12.576944Z] [RULES] Flatten all
+[2025-08-24T22:31:12.581655Z] [EXECUTOR] Traitement signal UB1! -> position 0 (qty=1)
+[2025-08-24T22:31:12.588245Z] [ERREUR] Position invalide : 0
+[2025-08-24T22:31:12.595634Z] [RULES] Short -1
+[2025-08-24T22:31:12.600606Z] [EXECUTOR] Traitement signal UB1! -> position -1 (qty=1)
+[2025-08-24T22:31:12.616094Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:31:12.624751Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:31:12.638866Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:31:12.645499Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:31:12.750367Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:31:12.755475Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:31:12.760786Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:31:12.765225Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:31:12.900408Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:31:12.906257Z] [TRADE] Réponse brute: {"orderId":1509855938,"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:31:12.912391Z] [TRADE] Succès métier confirmé (success=true).
+[2025-08-24T22:32:09.948416Z] [SIGNAL] Lu depuis NDJSON : {'content_type': 'text/plain', 'instrument': 'UB1!', 'position': 1, 'timestamp': '2025-08-24T22:32:08.991809Z'}
+[2025-08-24T22:32:09.953295Z] [SIGNAL] Lu depuis NDJSON : {'content_type': 'text/plain', 'instrument': 'UB1!', 'position': 0, 'timestamp': '2025-08-24T22:32:09.497384Z'}
+[2025-08-24T22:32:14.961181Z] [RULES] Traitement des signaux pour 2025-08-24T22:32 : {0, 1}
+[2025-08-24T22:32:14.966685Z] [RULES] Flatten all
+[2025-08-24T22:32:14.974945Z] [EXECUTOR] Traitement signal UB1! -> position 0 (qty=1)
+[2025-08-24T22:32:14.983735Z] [ERREUR] Position invalide : 0
+[2025-08-24T22:32:14.988348Z] [RULES] Long +1
+[2025-08-24T22:32:14.992845Z] [EXECUTOR] Traitement signal UB1! -> position 1 (qty=1)
+[2025-08-24T22:32:15.000319Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:32:15.005686Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:32:15.010244Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:32:15.016937Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 0, 'size': 1}
+[2025-08-24T22:32:15.119759Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:32:15.125226Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:32:15.129655Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjUzYWU2OWZjLTljZjgtNDZkNy1hYzNlLWMzM2FhMTMyY2Y5YSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MDgwNn0.MuJTmz-atECZ83fCcaVD6e9dnjbKsITYiHxoKo846Uk', 'Content-Type': 'application/json'}
+[2025-08-24T22:32:15.134909Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 0, 'size': 1}
+[2025-08-24T22:32:15.276219Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:32:15.283140Z] [TRADE] Réponse brute: {"orderId":1509858653,"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:32:15.295452Z] [TRADE] Succès métier confirmé (success=true).
+[2025-08-24T22:39:49.466412Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T22:39:49.473076Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T22:57:24.787822Z] [URDU BOT] Démarrage en mode : LIVE
+[2025-08-24T22:57:25.775853Z] [AUTH] POST https://api.topstepx.com/api/Auth/loginKey -> 200
+[2025-08-24T22:57:25.782080Z] [AUTH] Réponse brute: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc1YTU2ZWE1LWJmMjAtNDg3Ni1hNGQxLTdjM2I3OTVjNDRkZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MjY0Nn0.9n4yAOHYFTwf3zYFdUMzKG8hpYXD_6fBuDzbOEFCGUs","success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:57:25.789345Z] [AUTH] Authentification réussie, token obtenu.
+[2025-08-24T22:57:25.798078Z] [URDU BOT] Monitoring actif...
+[2025-08-24T22:57:25.811656Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.442559Z', 'position': -1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:57:25.821604Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.945065Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T22:57:30.837124Z] [RULES] Traitement des signaux pour 2025-08-24T20:19 : {0, -1}
+[2025-08-24T22:57:30.843826Z] [RULES] Short -1
+[2025-08-24T22:57:30.854235Z] [EXECUTOR] Traitement signal UB1! -> position -1 (qty=1)
+[2025-08-24T22:57:30.883182Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:57:30.898285Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:57:30.921902Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc1YTU2ZWE1LWJmMjAtNDg3Ni1hNGQxLTdjM2I3OTVjNDRkZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MjY0Nn0.9n4yAOHYFTwf3zYFdUMzKG8hpYXD_6fBuDzbOEFCGUs', 'Content-Type': 'application/json'}
+[2025-08-24T22:57:30.933108Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:57:31.870284Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:57:31.875241Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:57:31.910037Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc1YTU2ZWE1LWJmMjAtNDg3Ni1hNGQxLTdjM2I3OTVjNDRkZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MjY0Nn0.9n4yAOHYFTwf3zYFdUMzKG8hpYXD_6fBuDzbOEFCGUs', 'Content-Type': 'application/json'}
+[2025-08-24T22:57:31.921895Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 1, 'size': 1}
+[2025-08-24T22:57:32.057474Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:57:32.065023Z] [TRADE] Réponse brute: {"orderId":1509910888,"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:58:16.102921Z] [SIGNAL] Lu depuis NDJSON : {'content_type': 'text/plain', 'instrument': 'UB1!', 'position': 1, 'timestamp': '2025-08-24T22:58:15.014601Z'}
+[2025-08-24T22:58:21.111274Z] [RULES] Traitement des signaux pour 2025-08-24T22:58 : {1}
+[2025-08-24T22:58:21.117417Z] [RULES] Flatten all
+[2025-08-24T22:58:21.135136Z] [POSITION] Envoi POST => URL: https://api.topstepx.com/api/Position/searchOpen
+[2025-08-24T22:58:21.147570Z] [POSITION] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc1YTU2ZWE1LWJmMjAtNDg3Ni1hNGQxLTdjM2I3OTVjNDRkZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MjY0Nn0.9n4yAOHYFTwf3zYFdUMzKG8hpYXD_6fBuDzbOEFCGUs', 'Content-Type': 'application/json'}
+[2025-08-24T22:58:21.153380Z] [POSITION] Payload: {'accountId': 10889305}
+[2025-08-24T22:58:21.260477Z] [POSITION] Statut HTTP: 200
+[2025-08-24T22:58:21.269144Z] [POSITION] Réponse brute: {"positions":[{"id":343288259,"accountId":10889305,"contractId":"CON.F.US.ULA.U25","creationTimestamp":"2025-08-24T22:57:32.955033+00:00","type":2,"size":1,"averagePrice":117.406250000}],"success":true,"errorCode":0,"errorMessage":null}
+[2025-08-24T22:58:21.280533Z] [FLATTEN] Position ignorée (incomplète): {'id': 343288259, 'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'creationTimestamp': '2025-08-24T22:57:32.955033+00:00', 'type': 2, 'size': 1, 'averagePrice': 117.40625}
+[2025-08-24T22:58:21.319045Z] [FLATTEN] Rien à fermer pour ce contrat.
+[2025-08-24T22:58:21.326200Z] [RULES] Long +1
+[2025-08-24T22:58:21.334414Z] [EXECUTOR] Traitement signal UB1! -> position 1 (qty=1)
+[2025-08-24T22:58:21.351591Z] [TRADE] Commande préparée pour envoi :
+[2025-08-24T22:58:21.363092Z] [TRADE] URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:58:21.373856Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc1YTU2ZWE1LWJmMjAtNDg3Ni1hNGQxLTdjM2I3OTVjNDRkZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MjY0Nn0.9n4yAOHYFTwf3zYFdUMzKG8hpYXD_6fBuDzbOEFCGUs', 'Content-Type': 'application/json'}
+[2025-08-24T22:58:21.384744Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 0, 'size': 1}
+[2025-08-24T22:58:21.495122Z] [AUTH] Vérif token -> 200
+[2025-08-24T22:58:21.505794Z] [TRADE] Envoi POST => URL: https://api.topstepx.com/api/Order/place
+[2025-08-24T22:58:21.524732Z] [TRADE] Headers: {'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3ODQ5NiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc1YTU2ZWE1LWJmMjAtNDg3Ni1hNGQxLTdjM2I3OTVjNDRkZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbnZlc3RAYXJ0aW5pdGlhdGl2ZS5uZXQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbm1ldGhvZCI6ImFwaS1rZXkiLCJtc2QiOiJDTUVHUk9VUF9UT0IiLCJtZmEiOiJ2ZXJpZmllZCIsImV4cCI6MTc1NjE2MjY0Nn0.9n4yAOHYFTwf3zYFdUMzKG8hpYXD_6fBuDzbOEFCGUs', 'Content-Type': 'application/json'}
+[2025-08-24T22:58:21.536001Z] [TRADE] Payload: {'accountId': 10889305, 'contractId': 'CON.F.US.ULA.U25', 'type': 2, 'side': 0, 'size': 1}
+[2025-08-24T22:58:21.677962Z] [TRADE] Statut HTTP: 200
+[2025-08-24T22:58:21.686980Z] [TRADE] Réponse brute: {"orderId":1509913149,"success":true,"errorCode":0,"errorMessage":null}

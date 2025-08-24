@@ -1,6 +1,7 @@
 import time
 from collections import defaultdict
 from utils.logger import log
+from utils.state import STATE
 
 
 class TradeRulesEngine:
@@ -12,25 +13,25 @@ class TradeRulesEngine:
         self.inactivity_timeout = inactivity_timeout
         self.current_position = 0  # 0: flat, 1: long, -1: short
         self.logging_enabled = logging_enabled
+        STATE.set_position(self.current_position)
 
     def _get_minute_key(self, timestamp_str):
-        return timestamp_str[:16]  # e.g., '2025-08-24T19:54'
+        return timestamp_str[:16]
 
     def handle_signal(self, signal: dict):
         minute_key = self._get_minute_key(signal["timestamp"])
         self.signals_per_minute[minute_key].append(signal)
         self.last_signal_time = time.time()
+        STATE.record_signal(signal)
 
     def tick(self):
         now = time.time()
         if now - self.last_signal_time < self.inactivity_timeout:
             return
-
         if not self.signals_per_minute:
             return
 
         latest_minute = max(self.signals_per_minute.keys())
-
         if latest_minute == self.last_processed_minute:
             return
 
@@ -42,7 +43,6 @@ class TradeRulesEngine:
     def _process_minute_signals(self, minute_key, signals):
         positions = set(s["position"] for s in signals)
         instrument = signals[0]["instrument"]
-
         log(f"[RULES] Traitement des signaux pour {minute_key} : {positions}", self.logging_enabled)
 
         if positions == {0, 1}:
@@ -73,15 +73,21 @@ class TradeRulesEngine:
     def _flatten_all(self, instrument):
         if self.current_position != 0:
             log("[RULES] Flatten all", self.logging_enabled)
-            self.executor.process_signal({"instrument": instrument, "position": 0})
+            STATE.record_action("flatten", instrument)
+            self.executor.flatten_all(instrument)
             self.current_position = 0
+            STATE.set_position(0)
 
     def _go_long(self, instrument):
         log("[RULES] Long +1", self.logging_enabled)
+        STATE.record_action("long+1", instrument)
         self.executor.process_signal({"instrument": instrument, "position": 1})
         self.current_position = 1
+        STATE.set_position(1)
 
     def _go_short(self, instrument):
         log("[RULES] Short -1", self.logging_enabled)
+        STATE.record_action("short-1", instrument)
         self.executor.process_signal({"instrument": instrument, "position": -1})
         self.current_position = -1
+        STATE.set_position(-1)

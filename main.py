@@ -5,6 +5,7 @@ from utils.cli_parser import parse_cli_args
 from signals.reader import SignalReader
 from trading.executor import TradeExecutor
 from trading.rules import TradeRulesEngine
+from dashboard.server import start_dashboard
 
 
 def main():
@@ -31,6 +32,11 @@ def main():
 
         # instancie l'executor, récupère le client live
         executor = TradeExecutor(config)
+        
+        # 🖥️ Démarrer le dashboard en thread (si activé)
+        start_dashboard(config, executor)
+        rules_engine = TradeRulesEngine(executor, inactivity_timeout=5, logging_enabled=config.logging_enabled)
+        
         client = executor.engine  # TopstepXClient (façade)
 
         # 1) Ouvrir un trade (long +1 par exemple)
