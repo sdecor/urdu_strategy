@@ -20,3 +20,8 @@ class Config:
         self.api_endpoints = self.config.get("api_endpoints", {})
         self.logging_enabled = self.config.get("logging", True)
         self.log_file = self.config.get("log_file", "urdu_bot.log")
+        self.contract_id = self.config.get("contract_id")
+        self.default_quantity = self.config.get("default_quantity", 1)
+        self.contract_id = self.config.get("contract_id")
+        self.default_quantity = self.config.get("default_quantity", 1)
+        self.default_order_type = self.config.get("default_order_type", 2)

@@ -20,4 +20,11 @@ def parse_cli_args():
         help="Override du chemin du fichier de log"
     )
 
+    # 🧪 Test manuel API : ouvre un trade, liste les positions, puis flatten all
+    parser.add_argument(
+        "--probe-api",
+        action="store_true",
+        help="Séquence de test manuel API: open -> get positions -> flatten all (mode live uniquement)"
+    )
+
     return parser.parse_args()

@@ -8,28 +8,49 @@ from trading.rules import TradeRulesEngine
 
 
 def main():
-    # 🧩 CLI args
     args = parse_cli_args()
-
-    # ⚙️ Config
     config = Config()
 
-    # Override du mode
     if args.mode:
         config.mode = args.mode
         log(f"[CLI] Override mode actif : {config.mode.upper()}", config.logging_enabled)
 
-    # Override fichier de log
     if args.log_file:
         config.log_file = args.log_file
         log(f"[CLI] Override log file : {config.log_file}", config.logging_enabled)
 
-    # Appliquer le fichier log
     set_log_file(config.log_file)
 
     log(f"[URDU BOT] Démarrage en mode : {config.mode.upper()}", config.logging_enabled)
 
-    # SignalReader
+    # 🧪 Probe API: séquence manuelle open -> positions -> flatten
+    if args.probe_api:
+        if config.mode != "live":
+            log("[PROBE] Le test manuel API nécessite --mode live.", config.logging_enabled)
+            return
+
+        # instancie l'executor, récupère le client live
+        executor = TradeExecutor(config)
+        client = executor.engine  # TopstepXClient (façade)
+
+        # 1) Ouvrir un trade (long +1 par exemple)
+        qty = config.default_quantity
+        log(f"[PROBE] 1/3 Ouverture d'un ordre MARKET size={qty}", config.logging_enabled)
+        client.execute_trade(instrument="N/A", position=1, size=qty)
+
+        # 2) Récupérer positions ouvertes
+        log("[PROBE] 2/3 Récupération des positions ouvertes", config.logging_enabled)
+        positions = client.get_open_positions()
+        log(f"[PROBE] Positions ouvertes (brut): {positions}", config.logging_enabled)
+
+        # 3) Flatten all (pour le contrat configuré)
+        log("[PROBE] 3/3 Flatten all", config.logging_enabled)
+        client.flatten_all()
+
+        log("[PROBE] Séquence complète terminée.", config.logging_enabled)
+        return
+
+    # --- Exécution normale du bot ---
     signal_reader = SignalReader("signals.ndjson")
     signal_reader.start(reset_pointer=args.reset_pointer)
 

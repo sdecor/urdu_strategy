@@ -10,14 +10,18 @@ dashboard:
   host: "127.0.0.1"
   port: 5001
 
+contract_id: "CON.F.US.ULA.U25"
+default_quantity: 1
+default_order_type: 2 # 2 = Market
+
 api_endpoints:
-  login_key: "/api/Auth/loginKey"
-  order_search: "/api/Order/search"
-  order_search_open: "/api/Order/searchOpen"
-  order_cancel: "/api/Order/cancel"
-  position_search_open: "/api/Position/searchOpen"
+  account_search: "/api/Account/search"
   contract_available: "/api/Contract/available"
   contract_search: "/api/Contract/search"
   contract_search_by_id: "/api/Contract/searchById"
+  login_key: "/api/Auth/loginKey"
+  order_cancel: "/api/Order/cancel"
   order_place: "/api/Order/place"
-  account_search: "/api/Account/search"
+  order_search: "/api/Order/search"
+  order_search_open: "/api/Order/searchOpen"
+  position_search_open: "/api/Position/searchOpen"
