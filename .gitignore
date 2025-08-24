@@ -82,3 +82,5 @@ cython_debug/
 
 logs/
 signals.ndjson
+*.zip
+*.log
