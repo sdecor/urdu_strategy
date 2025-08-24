@@ -1,0 +1,94 @@
+[2025-08-24T19:39:18.847487Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T19:39:18.882245Z] [URDU BOT] Monitoring actif...
+[2025-08-24T19:49:01.918510Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T19:49:01.941920Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T19:51:03.543037Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T19:51:03.556093Z] [URDU BOT] Monitoring actif...
+[2025-08-24T19:51:10.591884Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T19:53:23.330945Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T19:53:23.336758Z] [URDU BOT] Monitoring actif...
+[2025-08-24T19:53:23.356313Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:51:09.244675Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 0}
+[2025-08-24T19:53:23.362759Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:51:09.751116Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 1}
+[2025-08-24T19:53:28.368604Z] [RULES] Traitement des signaux pour 2025-08-24T19:51 : {0, 1}
+[2025-08-24T19:53:28.373999Z] [RULES] Long +1
+[2025-08-24T19:53:57.405812Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:53:56.848996Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 0}
+[2025-08-24T19:53:57.410115Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:53:57.363597Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T19:54:02.416877Z] [RULES] Traitement des signaux pour 2025-08-24T19:53 : {0, -1}
+[2025-08-24T19:54:02.420478Z] [RULES] Flatten all
+[2025-08-24T19:54:02.423224Z] [RULES] Short -1
+[2025-08-24T19:54:31.437766Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:54:30.397885Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 1}
+[2025-08-24T19:54:31.443763Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:54:30.911791Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 0}
+[2025-08-24T19:54:36.449164Z] [RULES] Traitement des signaux pour 2025-08-24T19:54 : {0, 1}
+[2025-08-24T19:54:36.454093Z] [RULES] Flatten all
+[2025-08-24T19:54:36.471097Z] [RULES] Long +1
+[2025-08-24T19:55:08.497354Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:55:07.121100Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 1}
+[2025-08-24T19:55:13.504871Z] [RULES] Traitement des signaux pour 2025-08-24T19:55 : {1}
+[2025-08-24T19:55:13.509945Z] [RULES] Long +1
+[2025-08-24T19:55:29.522691Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:55:28.885530Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T19:55:59.539721Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:55:58.186999Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T19:58:12.321946Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T19:58:12.326250Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T19:58:58.463750Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T19:58:58.467435Z] [URDU BOT] Monitoring actif...
+[2025-08-24T19:59:07.474754Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:59:06.236010Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T19:59:07.478499Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:59:06.748230Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 0}
+[2025-08-24T19:59:12.483665Z] [RULES] Traitement des signaux pour 2025-08-24T19:59 : {0, -1}
+[2025-08-24T19:59:12.487527Z] [RULES] Short -1
+[2025-08-24T20:00:23.523448Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:00:22.104596Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T20:00:28.529750Z] [RULES] Traitement des signaux pour 2025-08-24T20:00 : {-1}
+[2025-08-24T20:00:28.533897Z] [RULES] Short -1
+[2025-08-24T20:02:40.604834Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:02:39.757036Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 1}
+[2025-08-24T20:02:45.611178Z] [RULES] Traitement des signaux pour 2025-08-24T20:02 : {1}
+[2025-08-24T20:02:45.615315Z] [RULES] Flatten all
+[2025-08-24T20:02:45.620725Z] [RULES] Long +1
+[2025-08-24T20:03:53.176903Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T20:03:53.180633Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T20:17:47.459346Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T20:17:47.471476Z] [URDU BOT] Monitoring actif...
+[2025-08-24T20:17:47.476547Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:59:06.236010Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T20:17:47.481555Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T19:59:06.748230Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 0}
+[2025-08-24T20:17:47.485910Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:00:22.104596Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': -1}
+[2025-08-24T20:17:47.489429Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:02:39.757036Z', 'instrument': 'UB1!', 'content_type': 'text/plain', 'position': 1}
+[2025-08-24T20:17:52.494988Z] [RULES] Traitement des signaux pour 2025-08-24T20:02 : {1}
+[2025-08-24T20:17:52.498557Z] [RULES] Long +1
+[2025-08-24T20:17:52.501759Z] [EXECUTOR] Traitement signal UB1! -> position 1
+[2025-08-24T20:17:52.516690Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:17:52.516582Z', 'instrument': 'UB1!', 'position': 1, 'status': 'simulated'}
+[2025-08-24T20:17:53.289534Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T20:17:53.293412Z] [URDU BOT] Fermeture propre terminée.
+[2025-08-24T20:19:00.558558Z] [URDU BOT] Démarrage en mode : SIMULATION
+[2025-08-24T20:19:00.562209Z] [URDU BOT] Monitoring actif...
+[2025-08-24T20:19:04.567603Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:03.222712Z', 'position': 1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T20:19:09.574626Z] [RULES] Traitement des signaux pour 2025-08-24T20:19 : {1}
+[2025-08-24T20:19:09.578194Z] [RULES] Long +1
+[2025-08-24T20:19:09.580944Z] [EXECUTOR] Traitement signal UB1! -> position 1
+[2025-08-24T20:19:09.585093Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:19:09.585010Z', 'instrument': 'UB1!', 'position': 1, 'status': 'simulated'}
+[2025-08-24T20:19:48.605577Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.442559Z', 'position': -1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T20:19:48.610487Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:19:47.945065Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T20:20:53.642929Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:20:52.907520Z', 'position': -1, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T20:20:53.647079Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:20:53.407651Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T20:20:58.652811Z] [RULES] Traitement des signaux pour 2025-08-24T20:20 : {0, -1}
+[2025-08-24T20:20:58.657058Z] [RULES] Flatten all
+[2025-08-24T20:20:58.660509Z] [EXECUTOR] Traitement signal UB1! -> position 0
+[2025-08-24T20:20:58.665471Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:20:58.665350Z', 'instrument': 'UB1!', 'position': 0, 'status': 'simulated'}
+[2025-08-24T20:20:58.669160Z] [RULES] Short -1
+[2025-08-24T20:20:58.672322Z] [EXECUTOR] Traitement signal UB1! -> position -1
+[2025-08-24T20:20:58.675304Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:20:58.675189Z', 'instrument': 'UB1!', 'position': -1, 'status': 'simulated'}
+[2025-08-24T20:20:59.679317Z] [RULES] Traitement des signaux pour 2025-08-24T20:19 : {0, -1}
+[2025-08-24T20:20:59.683007Z] [RULES] Flatten all
+[2025-08-24T20:20:59.685987Z] [EXECUTOR] Traitement signal UB1! -> position 0
+[2025-08-24T20:20:59.689317Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:20:59.689212Z', 'instrument': 'UB1!', 'position': 0, 'status': 'simulated'}
+[2025-08-24T20:20:59.693278Z] [RULES] Short -1
+[2025-08-24T20:20:59.699082Z] [EXECUTOR] Traitement signal UB1! -> position -1
+[2025-08-24T20:20:59.703028Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:20:59.702762Z', 'instrument': 'UB1!', 'position': -1, 'status': 'simulated'}
+[2025-08-24T20:21:23.716927Z] [SIGNAL] Lu depuis NDJSON : {'timestamp': '2025-08-24T20:21:22.653664Z', 'position': 0, 'instrument': 'UB1!', 'content_type': 'text/plain'}
+[2025-08-24T20:21:28.722652Z] [RULES] Traitement des signaux pour 2025-08-24T20:21 : {0}
+[2025-08-24T20:21:28.726728Z] [RULES] Flatten all
+[2025-08-24T20:21:28.730445Z] [EXECUTOR] Traitement signal UB1! -> position 0
+[2025-08-24T20:21:28.734495Z] [SIMULATION] Trade simulé: {'timestamp': '2025-08-24T20:21:28.734401Z', 'instrument': 'UB1!', 'position': 0, 'status': 'simulated'}
+[2025-08-24T20:21:44.954889Z] 
+[URDU BOT] Arrêt demandé par l'utilisateur.
+[2025-08-24T20:21:44.959534Z] [URDU BOT] Fermeture propre terminée.

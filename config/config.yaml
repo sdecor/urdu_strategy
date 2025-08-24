@@ -1,0 +1,23 @@
+mode: simulation # ou 'live'
+poll_interval_seconds: 1
+
+logging: true
+
+log_file: "logs/urdu_bot.log"
+
+dashboard:
+  enabled: true
+  host: "127.0.0.1"
+  port: 5001
+
+api_endpoints:
+  login_key: "/api/Auth/loginKey"
+  order_search: "/api/Order/search"
+  order_search_open: "/api/Order/searchOpen"
+  order_cancel: "/api/Order/cancel"
+  position_search_open: "/api/Position/searchOpen"
+  contract_available: "/api/Contract/available"
+  contract_search: "/api/Contract/search"
+  contract_search_by_id: "/api/Contract/searchById"
+  order_place: "/api/Order/place"
+  account_search: "/api/Account/search"
