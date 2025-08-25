@@ -49,7 +49,7 @@ def run_probe_sequence(config):
 
 
 def run_monitoring_loop(config, args):
-    signal_reader = SignalReader("signals.ndjson")
+    signal_reader = SignalReader(config.paths["signals_file"])
     signal_reader.start(reset_pointer=args.reset_pointer)
 
     executor = TradeExecutor(config)
@@ -71,7 +71,6 @@ def run_monitoring_loop(config, args):
     finally:
         signal_reader.close()
         log("[URDU BOT] Fermeture propre terminée.", config.logging_enabled)
-
 
 def run_urdu_bot():
     args, config = parse_and_load_config()

@@ -25,3 +25,4 @@ class Config:
         self.contract_id = self.config.get("contract_id")
         self.default_quantity = self.config.get("default_quantity", 1)
         self.default_order_type = self.config.get("default_order_type", 2)
+        self.paths = self.config.get("paths", {})

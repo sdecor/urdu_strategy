@@ -4,6 +4,8 @@ poll_interval_seconds: 1
 logging: true
 
 log_file: "logs/urdu_bot.log"
+paths:
+  signals_file: "data/input/signals.ndjson"
 
 dashboard:
   enabled: true
