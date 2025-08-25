@@ -26,3 +26,4 @@ class Config:
         self.default_quantity = self.config.get("default_quantity", 1)
         self.default_order_type = self.config.get("default_order_type", 2)
         self.paths = self.config.get("paths", {})
+        self.trading_hours = self.config.get("trading_hours", {})

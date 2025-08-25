@@ -7,6 +7,10 @@ log_file: "logs/urdu_bot.log"
 paths:
   signals_file: "data/input/signals.ndjson"
 
+trading_hours:
+  start_utc: "02:00"
+  stop_utc: "20:05"
+
 dashboard:
   enabled: true
   host: "127.0.0.1"
