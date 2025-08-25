@@ -1,63 +1,56 @@
+import requests
 from utils.logger import log
-
+from api.positions import get_open_positions
 
 class FlattenService:
-    """
-    Ferme toutes les positions du contrat configuré en envoyant des ordres inverses.
-    Repose sur AccountsService (lecture) + OrdersService (place inverse).
-    """
-    def __init__(self, accounts_service, orders_service, contract_id: str, logging_enabled: bool = True):
-        self.accounts = accounts_service
-        self.orders = orders_service
+    def __init__(self, accounts_service, orders_service=None, contract_id=None, logging_enabled=True):
+        self.accounts_service = accounts_service
         self.contract_id = contract_id
         self.logging_enabled = logging_enabled
+        self.http = accounts_service.http  # Accès au HttpBase depuis accounts_service
 
     def flatten_all(self):
-        data = self.accounts.get_open_positions()
-        results = []
-        if not data:
-            log("[FLATTEN] Aucune donnée de positions reçue.", self.logging_enabled)
-            return results
+        """
+        Clôture toutes les positions ouvertes via /Position/closeContract.
+        """
+        close_url = self.http.base_url.rstrip("/") + self.http.endpoints["position_close_contract"]
+        jwt_token = self.http.jwt_token
+        account_id = self.http.account_id
 
-        positions = self._extract_positions_list(data)
-        if not positions:
+        log("[FLATTEN] Tentative de clôture via /Position/closeContract...", self.logging_enabled)
+
+        open_positions = get_open_positions(jwt_token, account_id, self.http)
+        if not open_positions:
             log("[FLATTEN] Aucune position ouverte détectée.", self.logging_enabled)
-            return results
+            return
 
-        for pos in positions:
-            c_id = pos.get("contractId") or pos.get("contractID") or pos.get("contract_id")
-            if self.contract_id and c_id and c_id != self.contract_id:
-                continue  # on limite au contrat configuré
-
-            side = pos.get("side")  # 0 = long, 1 = short
-            size = pos.get("size") or pos.get("quantity") or pos.get("qty")
-            try:
-                size = int(size)
-            except Exception:
-                size = None
-
-            if side is None or not size:
-                log(f"[FLATTEN] Position ignorée (incomplète): {pos}", self.logging_enabled)
+        for pos in open_positions:
+            contract_id = pos.get("contractId")
+            if not contract_id:
+                log("[FLATTEN] ❌ Contrat ID manquant, impossible de clôturer.", self.logging_enabled)
                 continue
 
-            # ordre inverse : si long (0) -> SELL (position -1), si short (1) -> BUY (position +1)
-            reverse_position = -1 if side == 0 else 1
-            log(f"[FLATTEN] Fermeture {c_id} side={side} size={size} -> ordre inverse {reverse_position}", self.logging_enabled)
-            res = self.orders.place_order(position=reverse_position, size=size)
-            results.append(res)
+            payload = {
+                "accountId": account_id,
+                "contractId": contract_id
+            }
 
-        if not results:
-            log("[FLATTEN] Rien à fermer pour ce contrat.", self.logging_enabled)
-        else:
-            log(f"[FLATTEN] Demandes de fermeture envoyées: {len(results)}", self.logging_enabled)
-        return results
+            headers = {
+                "Authorization": f"Bearer {jwt_token}",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
 
-    @staticmethod
-    def _extract_positions_list(data):
-        if isinstance(data, dict):
-            for key in ("positions", "openPositions", "items", "data"):
-                if key in data and isinstance(data[key], list):
-                    return data[key]
-        if isinstance(data, list):
-            return data
-        return []
+            try:
+                response = requests.post(close_url, headers=headers, json=payload)
+                if response.status_code == 200:
+                    log(f"✅ Clôture réussie pour le contrat {contract_id}", self.logging_enabled)
+                else:
+                    log(f"❌ Échec clôture contrat {contract_id} - Statut HTTP: {response.status_code}", self.logging_enabled)
+                    try:
+                        error = response.json().get("errorMessage", response.text)
+                        log(f"   Message: {error}", self.logging_enabled)
+                    except Exception:
+                        log(f"   Réponse brute: {response.text}", self.logging_enabled)
+            except Exception as e:
+                log(f"⚠️ Erreur lors de l'appel à /closeContract : {e}", self.logging_enabled)

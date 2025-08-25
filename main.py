@@ -8,7 +8,7 @@ from trading.rules import TradeRulesEngine
 from dashboard.server import start_dashboard
 
 
-def main():
+def parse_and_load_config():
     args = parse_cli_args()
     config = Config()
 
@@ -21,42 +21,34 @@ def main():
         log(f"[CLI] Override log file : {config.log_file}", config.logging_enabled)
 
     set_log_file(config.log_file)
+    return args, config
 
-    log(f"[URDU BOT] Démarrage en mode : {config.mode.upper()}", config.logging_enabled)
 
-    # 🧪 Probe API: séquence manuelle open -> positions -> flatten
-    if args.probe_api:
-        if config.mode != "live":
-            log("[PROBE] Le test manuel API nécessite --mode live.", config.logging_enabled)
-            return
-
-        # instancie l'executor, récupère le client live
-        executor = TradeExecutor(config)
-        
-        # 🖥️ Démarrer le dashboard en thread (si activé)
-        start_dashboard(config, executor)
-        rules_engine = TradeRulesEngine(executor, inactivity_timeout=5, logging_enabled=config.logging_enabled)
-        
-        client = executor.engine  # TopstepXClient (façade)
-
-        # 1) Ouvrir un trade (long +1 par exemple)
-        qty = config.default_quantity
-        log(f"[PROBE] 1/3 Ouverture d'un ordre MARKET size={qty}", config.logging_enabled)
-        client.execute_trade(instrument="N/A", position=1, size=qty)
-
-        # 2) Récupérer positions ouvertes
-        log("[PROBE] 2/3 Récupération des positions ouvertes", config.logging_enabled)
-        positions = client.get_open_positions()
-        log(f"[PROBE] Positions ouvertes (brut): {positions}", config.logging_enabled)
-
-        # 3) Flatten all (pour le contrat configuré)
-        log("[PROBE] 3/3 Flatten all", config.logging_enabled)
-        client.flatten_all()
-
-        log("[PROBE] Séquence complète terminée.", config.logging_enabled)
+def run_probe_sequence(config):
+    if config.mode != "live":
+        log("[PROBE] Le test manuel API nécessite --mode live.", config.logging_enabled)
         return
 
-    # --- Exécution normale du bot ---
+    executor = TradeExecutor(config)
+    start_dashboard(config, executor)
+    rules_engine = TradeRulesEngine(executor, inactivity_timeout=5, logging_enabled=config.logging_enabled)
+    client = executor.engine
+
+    qty = config.default_quantity
+    log(f"[PROBE] 1/3 Ouverture d'un ordre MARKET size={qty}", config.logging_enabled)
+    client.execute_trade(instrument="N/A", position=1, size=qty)
+
+    log("[PROBE] 2/3 Récupération des positions ouvertes", config.logging_enabled)
+    positions = client.get_open_positions()
+    log(f"[PROBE] Positions ouvertes (brut): {positions}", config.logging_enabled)
+
+    log("[PROBE] 3/3 Flatten all", config.logging_enabled)
+    client.flatten_all()
+
+    log("[PROBE] Séquence complète terminée.", config.logging_enabled)
+
+
+def run_monitoring_loop(config, args):
     signal_reader = SignalReader("signals.ndjson")
     signal_reader.start(reset_pointer=args.reset_pointer)
 
@@ -81,5 +73,15 @@ def main():
         log("[URDU BOT] Fermeture propre terminée.", config.logging_enabled)
 
 
+def run_urdu_bot():
+    args, config = parse_and_load_config()
+    log(f"[URDU BOT] Démarrage en mode : {config.mode.upper()}", config.logging_enabled)
+
+    if args.probe_api:
+        run_probe_sequence(config)
+    else:
+        run_monitoring_loop(config, args)
+
+
 if __name__ == "__main__":
-    main()
+    run_urdu_bot()

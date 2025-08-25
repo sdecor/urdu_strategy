@@ -16,12 +16,12 @@ class HttpBase:
         self.logging_enabled = logging_enabled
 
         # 1) Auth : obtenir le token d'accès via /Auth/loginKey
-        self.token = self._authenticate()
+        self.jwt_token = self._authenticate()
 
         # 2) Session HTTP avec Bearer token
         self.session = requests.Session()
         self.session.headers.update({
-            "Authorization": f"Bearer {self.token}",
+            "Authorization": f"Bearer {self.jwt_token}",
             "Content-Type": "application/json",
             "Accept": "application/json"
         })

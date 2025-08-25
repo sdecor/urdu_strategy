@@ -10,8 +10,8 @@ Start-Sleep -Milliseconds 500
 $timestamp2 = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ")
 
 # Données JSON formatées en NDJSON
-$signal1 = @{ timestamp = $timestamp1; instrument = "UB1!"; position = 1; content_type = "text/plain" } | ConvertTo-Json -Compress
-# $signal2 = @{ timestamp = $timestamp2; instrument = "UB1!"; position = 0; content_type = "text/plain" } | ConvertTo-Json -Compress
+$signal1 = @{ timestamp = $timestamp1; instrument = "UB1!"; position = -1; content_type = "text/plain" } | ConvertTo-Json -Compress
+$signal2 = @{ timestamp = $timestamp2; instrument = "UB1!"; position = 0; content_type = "text/plain" } | ConvertTo-Json -Compress
 
 # Ajoute les deux lignes au fichier NDJSON
 $signal1 | Out-File -FilePath $targetFile -Encoding utf8 -Append

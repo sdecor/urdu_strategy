@@ -24,4 +24,5 @@ api_endpoints:
   order_place: "/api/Order/place"
   order_search: "/api/Order/search"
   order_search_open: "/api/Order/searchOpen"
+  position_close_contract: "/api/Position/closeContract"
   position_search_open: "/api/Position/searchOpen"
