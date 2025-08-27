@@ -1,14 +1,16 @@
+# main.py
 import time
-from datetime import time as dtime
 
 from utils.config_loader import Config
 from utils.logger import log, set_log_file
 from utils.cli_parser import parse_cli_args
 from utils.time_gate import TimeBasedGate
+from utils.schedule_gate import ScheduleGate, FileSessionStorage
+from utils.schedule_watcher import ScheduleWatcher
+from strategy.entry_policy import EntryPolicy
 from signals.reader import SignalReader
 from trading.executor import TradeExecutor
 from trading.rules import TradeRulesEngine
-from dashboard.server import start_dashboard
 
 
 def parse_and_load_config():
@@ -27,58 +29,74 @@ def parse_and_load_config():
     return args, config
 
 
-def run_probe_sequence(config):
-    if config.mode != "live":
-        log("[PROBE] Le test manuel API nécessite --mode live.", config.logging_enabled)
+def _maybe_start_dashboard(config, executor):
+    """
+    Démarre le dashboard si activé et disponible. Sinon ignore proprement.
+    """
+    if not getattr(config, "dashboard", {}):
         return
-
-    executor = TradeExecutor(config)
-    start_dashboard(config, executor)
-    rules_engine = TradeRulesEngine(executor, inactivity_timeout=5, logging_enabled=config.logging_enabled)
-    client = executor.engine
-
-    qty = config.default_quantity
-    log(f"[PROBE] 1/3 Ouverture d'un ordre MARKET size={qty}", config.logging_enabled)
-    client.execute_trade(instrument="N/A", position=1, size=qty)
-
-    log("[PROBE] 2/3 Récupération des positions ouvertes", config.logging_enabled)
-    positions = client.get_open_positions()
-    log(f"[PROBE] Positions ouvertes (brut): {positions}", config.logging_enabled)
-
-    log("[PROBE] 3/3 Flatten all", config.logging_enabled)
-    client.flatten_all()
-
-    log("[PROBE] Séquence complète terminée.", config.logging_enabled)
+    if not config.dashboard.get("enabled", False):
+        return
+    try:
+        from dashboard.server import start_dashboard  # lazy import
+        start_dashboard(config, executor)
+        log("[DASHBOARD] Démarré.", config.logging_enabled)
+    except Exception as e:
+        log(f"[DASHBOARD] Indisponible ({e}). Lancement ignoré.", config.logging_enabled)
 
 
 def run_monitoring_loop(config, args):
-    # Chemin des signaux via la config (ex: paths.signals_file: "data/input/signals.ndjson")
-    signal_reader = SignalReader(config.paths["signals_file"])
+    # Lecteur NDJSON depuis chemin config
+    signals_path = config.paths.get("signals_file", "data/input/signals.ndjson")
+    signal_reader = SignalReader(signals_path)
     signal_reader.start(reset_pointer=args.reset_pointer)
 
+    # Exécuteur (orchestrateur) + dashboard éventuel
     executor = TradeExecutor(config)
-    rules_engine = TradeRulesEngine(executor, inactivity_timeout=5, logging_enabled=config.logging_enabled)
+    _maybe_start_dashboard(config, executor)
 
-    # Fenêtre horaire depuis la config (trading_hours.start_utc / stop_utc)
-    time_gate = TimeBasedGate(
-        start_str=config.trading_hours.get("start_utc", "02:00"),
-        stop_str=config.trading_hours.get("stop_utc", "20:05")
+    # Gate multi-schedules (fenêtres/quotas) + entry policy
+    schedules_cfg = config.schedules  # top-level (résolus via ScheduleGate)
+    schedule_gate = ScheduleGate(
+        schedules_config=schedules_cfg,
+        storage=FileSessionStorage(config.paths.get("session_gate_file", "data/state/session_gate.json")),
+        logging_enabled=config.logging_enabled,
+        strategy_templates=config.strategy_templates
     )
+    entry_policy = EntryPolicy(schedule_gate)
+
+    # Règles de décision
+    rules_engine = TradeRulesEngine(
+        executor,
+        inactivity_timeout=5,
+        logging_enabled=config.logging_enabled,
+        entry_policy=entry_policy
+    )
+
+    # Fenêtre globale (peut coexister avec les schedules)
+    time_gate = TimeBasedGate(
+        start_str=config.trading_hours.get("start_utc", "00:00"),
+        stop_str=config.trading_hours.get("stop_utc", "23:59")
+    )
+
+    # Watcher pour auto-flatten à la fin d’un schedule si flatten_at_end=true
+    schedule_watcher = ScheduleWatcher(config.schedules, logging_enabled=config.logging_enabled)
 
     log("[URDU BOT] Monitoring actif...", config.logging_enabled)
 
     try:
         while True:
-            # Hors horaires : on PURGE le backlog en plaçant le pointeur en fin de fichier
-            # => À 02:00 UTC, seuls les nouveaux signaux seront pris en compte
+            # Watcher: détecte fin de schedule et déclenche flatten si requis
+            schedule_watcher.tick(executor)
+
+            # Si hors horaires globaux, on ferme si stop_utc et on purge les signaux
             if not time_gate.is_within_trading_hours():
                 if time_gate.is_shutdown_time():
                     log("[TIME] ⚠️ Clôture des positions automatique (fin de session).", config.logging_enabled)
-                    executor.engine.flatten_all()
-                    # Attendre un peu pour éviter les répétitions de fermeture
+                    executor.flatten_all(instrument="*")
                     time.sleep(60)
 
-                # Purge des signaux hors horaires : avancer le pointeur à la fin
+                # Purge backlog: avance le pointeur de lecture en fin de fichier
                 try:
                     if getattr(signal_reader, "_file", None) is not None:
                         signal_reader._file.seek(0, 2)  # EOF
@@ -89,7 +107,7 @@ def run_monitoring_loop(config, args):
                 time.sleep(10)
                 continue
 
-            # Fenêtre de trading ouverte : traiter les nouveaux signaux
+            # Fenêtre ouverte: consomme les nouveaux signaux
             for signal in signal_reader.read_new_signals():
                 log(f"[SIGNAL] Lu depuis NDJSON : {signal}", config.logging_enabled)
                 rules_engine.handle_signal(signal)
@@ -108,10 +126,8 @@ def run_urdu_bot():
     args, config = parse_and_load_config()
     log(f"[URDU BOT] Démarrage en mode : {config.mode.upper()}", config.logging_enabled)
 
-    if args.probe_api:
-        run_probe_sequence(config)
-    else:
-        run_monitoring_loop(config, args)
+    # Mode probe désactivé ici (garde la boucle principal)
+    run_monitoring_loop(config, args)
 
 
 if __name__ == "__main__":

@@ -1,78 +1,95 @@
+# api/orders.py
+import requests
 from utils.logger import log
-from api.mappings import map_position_to_side
-from api.errors import assert_business_success, BusinessError
+from utils.log_sanitizer import safe_log_api_call
 
 
-class OrdersService:
-    def __init__(self, http_base, contract_id, default_order_type=2):
-        self.http = http_base
-        self.contract_id = contract_id
-        self.default_order_type = int(default_order_type)
+class OrdersAPI:
+    """
+    Wrapper pour les endpoints liés aux ordres :
+    - place_order()
+    - cancel_order()
+    - search_orders()
+    - search_open_orders()
+    """
 
-    def place_order(
-        self,
-        *,
-        position: int,
-        size: int = 1,
-        order_type: int | None = None,
-        limitPrice: float | None = None,
-        stopPrice: float | None = None,
-        trailPrice: float | None = None,
-        customTag: str | None = None,
-        linkedOrderId: int | None = None
-    ):
-        endpoint = self.http.endpoints.get("order_place")
-        if not endpoint:
-            log("[ERREUR] Endpoint 'order_place' manquant dans la configuration.", self.http.logging_enabled)
-            return
+    def __init__(self, config, http_client):
+        self.config = config
+        self.http = http_client
+        self.base_url = http_client.base_url.rstrip("/")
+        self.endpoints = config.api_endpoints
 
-        side = map_position_to_side(position)  # 0=buy, 1=sell
-        if side is None:
-            log(f"[ERREUR] Position invalide : {position}", self.http.logging_enabled)
-            return
-
-        _type = int(order_type) if order_type is not None else self.default_order_type
-
-        payload = {
-            "accountId": self.http.account_id,
-            "contractId": self.contract_id,
-            "type": _type,
-            "side": side,
-            "size": int(size),
+    def place_order(self, payload: dict) -> dict:
+        url = self.base_url + self.endpoints["order_place"]
+        headers = {
+            "Authorization": f"Bearer {self.http.jwt_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
         }
-        if limitPrice is not None:
-            payload["limitPrice"] = float(limitPrice)
-        if stopPrice is not None:
-            payload["stopPrice"] = float(stopPrice)
-        if trailPrice is not None:
-            payload["trailPrice"] = float(trailPrice)
-        if customTag is not None:
-            payload["customTag"] = str(customTag)
-        if linkedOrderId is not None:
-            payload["linkedOrderId"] = int(linkedOrderId)
+        safe_log_api_call("POST", url, headers, payload, log, self.config.logging_enabled, prefix="[ORDER]")
 
-        url = f"{self.http.base_url}{endpoint}"
-        log(f"[TRADE] Commande préparée pour envoi :", self.http.logging_enabled)
-        log(f"[TRADE] URL: {url}", self.http.logging_enabled)
-        log(f"[TRADE] Headers: {dict(self.http.session.headers)}", self.http.logging_enabled)
-        log(f"[TRADE] Payload: {payload}", self.http.logging_enabled)
-
-        if not self.http.is_token_valid():
-            log("[AUTH] Token invalide ou expiré.", self.http.logging_enabled)
-            log("[TRADE] Abandon : token invalide, impossible d’envoyer l’ordre.", self.http.logging_enabled)
-            return
-
-        resp_json = self.http._post(endpoint, payload, tag="[TRADE]")
         try:
-            assert_business_success(resp_json, "[TRADE]", self.http.logging_enabled)
-        except BusinessError:
-            return
-        return resp_json
+            resp = requests.post(url, headers=headers, json=payload, timeout=10)
+            data = resp.json() if resp.status_code == 200 else {}
+            return {
+                "status": resp.status_code,
+                "success": data.get("success", False),
+                "orderId": data.get("orderId"),
+                "errorCode": data.get("errorCode"),
+                "errorMessage": data.get("errorMessage") or resp.text,
+            }
+        except Exception as e:
+            return {"success": False, "errorMessage": str(e)}
 
-    def cancel_order(self, order_id: int):
-        endpoint = self.http.endpoints.get("order_cancel")
-        if not endpoint:
-            log("[ERREUR] Endpoint 'order_cancel' manquant.", self.http.logging_enabled)
-            return None
-        payload = {"accountId": self.http.account_id, "orderId": int(order_id)}
-        return self.http._post(endpoint, payload, tag="[CANCEL]")
+    def cancel_order(self, order_id: int) -> dict:
+        url = self.base_url + self.endpoints["order_cancel"]
+        headers = {
+            "Authorization": f"Bearer {self.http.jwt_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+        payload = {"accountId": int(self.config.account_id), "orderId": order_id}
+        safe_log_api_call("POST", url, headers, payload, log, self.config.logging_enabled, prefix="[ORDER-CANCEL]")
+
+        try:
+            resp = requests.post(url, headers=headers, json=payload, timeout=10)
+            data = resp.json() if resp.status_code == 200 else {}
+            return {
+                "status": resp.status_code,
+                "success": data.get("success", resp.status_code in (200, 204)),
+                "errorCode": data.get("errorCode"),
+                "errorMessage": data.get("errorMessage") or resp.text,
+            }
+        except Exception as e:
+            return {"success": False, "errorMessage": str(e)}
+
+    def search_orders(self, criteria: dict) -> dict:
+        url = self.base_url + self.endpoints["order_search"]
+        headers = {
+            "Authorization": f"Bearer {self.http.jwt_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+        safe_log_api_call("POST", url, headers, criteria, log, self.config.logging_enabled, prefix="[ORDER-SEARCH]")
+
+        try:
+            resp = requests.post(url, headers=headers, json=criteria, timeout=10)
+            return resp.json() if resp.status_code == 200 else {"status": resp.status_code, "text": resp.text}
+        except Exception as e:
+            return {"success": False, "errorMessage": str(e)}
+
+    def search_open_orders(self) -> dict:
+        url = self.base_url + self.endpoints["order_search_open"]
+        headers = {
+            "Authorization": f"Bearer {self.http.jwt_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+        payload = {"accountId": int(self.config.account_id)}
+        safe_log_api_call("POST", url, headers, payload, log, self.config.logging_enabled, prefix="[ORDER-OPEN]")
+
+        try:
+            resp = requests.post(url, headers=headers, json=payload, timeout=10)
+            return resp.json() if resp.status_code == 200 else {"status": resp.status_code, "text": resp.text}
+        except Exception as e:
+            return {"success": False, "errorMessage": str(e)}

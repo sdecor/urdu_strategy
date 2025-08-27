@@ -1,6 +1,10 @@
+# api/positions.py
 import requests
+from utils.logger import log
+from utils.log_sanitizer import safe_log_api_call
 
-def get_open_positions(jwt_token, account_id, http):
+
+def get_open_positions(jwt_token: str, account_id: int, http) -> list:
     """
     Récupère les positions ouvertes via l'API TopstepX (/api/Position/searchOpen).
     """
@@ -10,19 +14,20 @@ def get_open_positions(jwt_token, account_id, http):
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
-    payload = {
-        "accountId": account_id
-    }
+    payload = {"accountId": int(account_id)}
+
+    safe_log_api_call("POST", url, headers, payload, log, True, prefix="[POSITION]")
 
     try:
-        response = requests.post(url, headers=headers, json=payload)
+        response = requests.post(url, headers=headers, json=payload, timeout=15)
         if response.status_code == 200:
             data = response.json()
-            return data.get("positions", [])
+            positions = data.get("positions", [])
+            return positions if isinstance(positions, list) else []
         else:
-            print(f"[POSITION] ❌ Erreur HTTP {response.status_code}")
-            print(f"[POSITION] Réponse : {response.text}")
+            log(f"[POSITION] ❌ HTTP {response.status_code}", True)
+            log(f"[POSITION] Réponse : {response.text}", True)
     except Exception as e:
-        print(f"[POSITION] ⚠️ Exception lors de l'appel à searchOpen : {e}")
+        log(f"[POSITION] ⚠️ Exception lors de l'appel à searchOpen : {e}", True)
 
     return []

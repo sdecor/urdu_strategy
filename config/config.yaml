@@ -2,23 +2,21 @@ mode: simulation # ou 'live'
 poll_interval_seconds: 1
 
 logging: true
-
 log_file: "logs/urdu_bot.log"
+
 paths:
   signals_file: "data/input/signals.ndjson"
+  contract_file: "data/output/contract.json"
+  session_gate_file: "data/state/session_gate.json"
 
 trading_hours:
-  start_utc: "02:00"
+  start_utc: "00:00"
   stop_utc: "20:05"
 
 dashboard:
   enabled: true
   host: "127.0.0.1"
   port: 5001
-
-contract_id: "CON.F.US.ULA.U25"
-default_quantity: 1
-default_order_type: 2 # 2 = Market
 
 api_endpoints:
   account_search: "/api/Account/search"
@@ -32,3 +30,41 @@ api_endpoints:
   order_search_open: "/api/Order/searchOpen"
   position_close_contract: "/api/Position/closeContract"
   position_search_open: "/api/Position/searchOpen"
+
+default_order_type: 2
+
+strategy_templates:
+  - type: "A"
+    total_lots: 10
+    tp_ticks: 4
+    tp_lots: 10
+    carry_remaining: false
+    flatten_at_end: false
+    max_trades: 1
+  - type: "B"
+    total_lots: 10
+    tp_ticks: 4
+    tp_lots: 6
+    carry_remaining: true
+    flatten_at_end: false
+    max_trades: 1
+
+schedules:
+  - id: "midnight"
+    start_utc: "22:00"
+    end_utc: "22:30"
+    max_trades: 1
+    strategy: "A"
+  - id: "fouroclock"
+    start_utc: "02:00"
+    end_utc: "02:30"
+    max_trades: 1
+    strategy: "B"
+
+contracts:
+  CON.F.US.ULA.U25:
+    tick_size: "1/32"
+
+risk:
+  max_order_size: 10
+  min_minutes_before_stop: 5
